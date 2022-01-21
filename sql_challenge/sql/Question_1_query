@@ -1,0 +1,19 @@
+SELECT
+  CASE
+    WHEN country_code IS NULL THEN 'N/A'
+  ELSE
+  country_code
+END
+  AS appear_more_than_once
+FROM
+  `salesloft-ex.sl_1.continent_map`
+GROUP BY
+  appear_more_than_once
+HAVING
+  COUNT(appear_more_than_once) > 1
+ORDER BY
+  CASE
+    WHEN appear_more_than_once = 'N/A' THEN 0
+  ELSE
+  1 
+END
